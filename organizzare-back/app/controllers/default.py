@@ -5,7 +5,3 @@ from app import app
 @app.route('/', defaults={'user':None})
 def index(user):
     return render_template('index.html', user=user)
-
-@app.route('/teste')
-def teste():
-    return "aoo"
