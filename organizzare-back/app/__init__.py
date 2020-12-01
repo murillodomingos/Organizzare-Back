@@ -13,3 +13,6 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 from app.controllers import default
+
+if __name__ == "__main__":
+    app.run()
