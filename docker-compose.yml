@@ -8,9 +8,5 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: default
-  organizzare-back:
-    build: .
-    depends_on:
-      - database1
-    ports:
-      - "5000:5000"
+    volumes:
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d/
