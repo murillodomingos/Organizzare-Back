@@ -1,7 +1,5 @@
 \connect "organizzare"
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE SCHEMA organizzare_app;
 
 ALTER SCHEMA organizzare_app OWNER TO "organizzare-org";
@@ -55,3 +53,5 @@ create table organizzare_app.bills(
 );
 
 ALTER TABLE organizzare_app.bills OWNER TO "organizzare-org";
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

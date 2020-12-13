@@ -1,5 +1,3 @@
-from connection import get_connection
-
 class Condominium_DAO:
     def __init__(self, conn):
         self.conn = conn
@@ -8,6 +6,7 @@ class Condominium_DAO:
         sql = """
         insert into organizzare_app.condominium(id, name, cep, address, number, city)
         values(uuid_generate_v4(),'{}','{}','{}','{}','{}')
+        returning id
         """.format(name, cep, address, number, city)
         return sql
 
@@ -15,11 +14,7 @@ class Condominium_DAO:
 
         trans = self.conn.begin()
         sql = self.get_create_condominium_sql(name, cep, address, number, city)
-        self.conn.execute(sql)
+        result = self.conn.execute(sql)
         trans.commit()
-
-conn = get_connection()
-DAO = Condominium_DAO(conn)
-
-DAO.create_condominium('rua mais bonita', '14171115', 'jardim das flores', '223', 'tiradentes')
-
+        for row in result:
+            return row[0]
