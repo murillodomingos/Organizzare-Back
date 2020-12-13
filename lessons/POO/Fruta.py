@@ -13,6 +13,9 @@ class Fruta: # <- classe
     def get_pounds(self):
         return "%d pounds"%(self.peso_g * 236)
 
+    def message(self):
+        return self.get_price() +" "+ self.get_pounds()
+
 medida_1 = Fruta("maçã", 200, 1.00) # <- objeto (instancia da classe usando o construtor)
 
 print(medida_1.get_price()) # <- chamada do metodo
@@ -20,3 +23,4 @@ print(medida_1.nome) # <- veficacao do atributo
 
 melao = create_melao() # <- uma funcao pode retornar um objeto
 print(melao.nome)
+print(melao.message())
