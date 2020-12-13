@@ -1,11 +1,7 @@
-def generate_insert_user(name, cpf, data_cadastro):
+def create_residents(name, cpf, register_timestamp, unregister_timestamp, apartment_id, foreign, primary):
     sql = """
-    INSERT INTO residents (id, name, cpf)
-    VALUES (uuid_generate_v4(), {}, {});
-    """.format(name, cpf)
-
+    insert into organizzare_app.condominium(id, name, cpf, register_timestamp, unregister_timestamp, apartment_id, foreign, primary)
+    values(uuid_generate_v4(),{},{},{},{},{},{},{})
+    """.format(name, cpf, register_timestamp, unregister_timestamp, apartment_id, foreign, primary)
     return sql
-
-y = generate_insert_user(data["name"], data["cpf"], data["date"])
-print(y)
-
+    
