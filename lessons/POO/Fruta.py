@@ -1,5 +1,5 @@
-def get_price(peso_g, preco_kg):   # <- funcao
-    return peso_g * preco_kg
+def create_melao(): # <- funcao
+    return Fruta('melao', 1000, 10)
 
 class Fruta: # <- classe
     def __init__(self, nome, peso_g, preco_kg): # <- construtor
@@ -17,3 +17,6 @@ medida_1 = Fruta("maçã", 200, 1.00) # <- objeto (instancia da classe usando o 
 
 print(medida_1.get_price()) # <- chamada do metodo
 print(medida_1.nome) # <- veficacao do atributo
+
+melao = create_melao() # <- uma funcao pode retornar um objeto
+print(melao.nome)
