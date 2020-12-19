@@ -9,22 +9,27 @@
 1. [x] apartments
 1. [x] residents
 1. [x] bills
-1. PUT working?
-1. [x] condominium
-1. [x] apartments
-1. [x] residents
-1. [x] bills
-1. GET working?
-1. [x] condominium
-1. [x] apartments
-2. [x] residents
-3. [x] bills
-4. LIST working?
-5. [x] condominium
-6. [x] apartments
-7. [x] residents
-8. [x] bills
-9. LIST relationship working?
-10. [x] apartments from condominium id
-11. [x] residents from apartment id
-12. [ ] bills from residents
+2. [ ] admins
+3. PUT working?
+4. [x] condominium
+5. [x] apartments
+6. [x] residents
+7. [x] bills
+8. [ ] admins
+9. GET working?
+10. [x] condominium
+11. [x] apartments
+12. [x] residents
+13. [x] bills
+14. [ ] admins
+15. LIST working?
+16. [x] condominium
+17. [x] apartments
+18. [x] residents
+19. [x] bills
+20. [ ] admins
+21. LIST relationship working?
+22. [x] apartments from condominium id
+23. [x] residents from apartment id
+24. [x] bills from residents
+    

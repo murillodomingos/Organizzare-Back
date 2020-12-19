@@ -27,4 +27,4 @@ class Bills_Service:
         return result
         
     def get_bills_from_residents(self, residents_id):
-        return self.bills_DAO.list_bils_from_residents(residents_id)
+        return self.bills_DAO.list_bills_from_residents(residents_id)

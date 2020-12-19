@@ -5,18 +5,18 @@ class Residents_DAO:
     def __init__(self, conn):
         self.conn = conn
 
-    def get_create_residents_sql(self, name, cpf, register_timestamp, apartment_id):
+    def get_create_residents_sql(self, name, cpf, register_timestamp, resident_hash, apartment_id):
         sql = """
-        insert into organizzare_app.residents(id, name, cpf, register_timestamp, unregister_timestamp, apartment_id)
-        values(uuid_generate_v4(),'{}','{}','{}', NULL,'{}')
+        insert into organizzare_app.residents(id, name, cpf, register_timestamp, unregister_timestamp, resident_hash, apartment_id)
+        values(uuid_generate_v4(),'{}','{}','{}', NULL, '{}','{}')
         returning id, name, cpf, register_timestamp, apartment_id
-        """.format(name, cpf, register_timestamp, apartment_id)
+        """.format(name, cpf, register_timestamp, resident_hash, apartment_id)
         return sql
 
-    def create_residents(self, name, cpf, register_timestamp, apartment_id):
+    def create_residents(self, name, cpf, register_timestamp, resident_hash, apartment_id):
 
         trans = self.conn.begin()
-        sql = self.get_create_residents_sql(name, cpf, register_timestamp, apartment_id)
+        sql = self.get_create_residents_sql(name, cpf, register_timestamp, resident_hash, apartment_id)
         try:
             result = self.conn.execute(sql)
             trans.commit()
@@ -151,18 +151,18 @@ class Residents_DAO:
         try:
             result = self.conn.execute(sql_list)
             trans.commit()
-            resident=[]
+            residents=[]
             for row in result:
-                residents={
+                resident={
                     'id':'{}'.format(row[0]),
                     'name':row[1],
                     'cpf':row[2],
                     'register_timestamp':row[3],
                     'apartment_id':row[4]
                 }
-                resident.append(residents)
+                residents.append(resident)
             return {
-                'resident': resident
+                'residents': residents
             }
         except:
             print_exc()
@@ -170,4 +170,32 @@ class Residents_DAO:
             return {
                 "message": "error happened when list residents"
             }    
+    def get_hash_from_residents_sql(self, cpf):
+        sql  = """
+        select 
+            resident_hash, id
+        from 
+            organizzare_app.residents r
+        where 
+            r.cpf = '{}'
+        """.format(cpf)
+        return sql
+
+    def get_hash_from_residents(self, cpf):
+        trans = self.conn.begin()
+        try:
+            sql_get = self.get_hash_from_residents_sql(cpf)
+            result = self.conn.execute(sql_get)
+            trans.commit()
+            for row in result:
+                return {
+                    'hash': '{}'.format(row[0]),
+                    'id': '{}'.format(row[1]),
+                    'user_type': 'resident'
+                }
+            raise Exception ('cpf nao existe')
+        except:
+            print_exc()
+            trans.rollback()
+            raise Exception("error happened when get resident")
 

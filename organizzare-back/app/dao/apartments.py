@@ -144,17 +144,17 @@ class Apartments_DAO:
         try:
             result = self.conn.execute(sql_list)
             trans.commit()
-            apartment=[]
+            apartments=[]
             for row in result:
-                apartments={
+                apartment={
                     'id': '{}'.format(row[0]),
                     "number": row[1],
                     'block': row[2],
                     'condominium': row[3]
                 }
-                apartment.append(apartments)
+                apartments.append(apartment)
             return {
-                'apartment': apartment
+                'apartments': apartments
             }
         except:
             print_exc()

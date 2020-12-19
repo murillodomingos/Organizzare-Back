@@ -119,9 +119,9 @@ class Bills_DAO:
         try:
             result = self.conn.execute(sql_list)
             trans.commit()
-            bill=[]
+            bills=[]
             for row in result:
-                bills={
+                bill={
                     'id' : '{}'.format(row[0]),
                     'bill_type' : row[1],
                     'register_timestamp' : row[2],
@@ -130,9 +130,9 @@ class Bills_DAO:
                     'code' : row[5],
                     'resident' : row[6]
                 }
-                bill.append(bills)
+                bills.append(bill)
             return {
-                'bill': bills
+                'bills': bills
             }
         except:
             print_exc()
@@ -152,7 +152,7 @@ class Bills_DAO:
         """.format(residents_id)
         return sql
     
-    def list_bils_from_residents(self, residents_id):
+    def list_bills_from_residents(self, residents_id):
         trans = self.conn.begin()
         sql_list = self.get_bills_from_residents_sql(residents_id)
         try:
