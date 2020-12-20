@@ -2,6 +2,7 @@ from werkzeug.wrappers import Request, Response, ResponseStream
 from service.admins import Admins_Service
 import jwt
 from traceback import print_exc
+import os
 
 class middleware():
 
@@ -37,7 +38,8 @@ class middleware():
 
     def get_user_authentication(self, user_jwt):    
         try:
-            payload = jwt.decode(user_jwt, 'j4g2373gda3g3')
+            JWT_PASSWORD = os.environ.get('JWT_PASSWORD')
+            payload = jwt.decode(user_jwt, JWT_PASSWORD)
             return payload['user_type']
         except jwt.ExpiredSignatureError:
             raise 'Signature expired. Please log in again.'

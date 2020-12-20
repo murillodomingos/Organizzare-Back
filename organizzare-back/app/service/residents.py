@@ -3,6 +3,7 @@ from dao.residents import Residents_DAO
 from datetime import datetime, timedelta
 from passlib.hash import pbkdf2_sha256
 import jwt
+import os
 
 class Residents_Service():
     def __init__(self):
@@ -39,9 +40,10 @@ class Residents_Service():
                 'sub': resident_id,
                 'user_type': user_type
             }
+            JWT_PASSWORD = os.environ.get('JWT_PASSWORD')
             return jwt.encode(
                 payload,
-                'j4g2373gda3g3',
+                JWT_PASSWORD,
                 algorithm='HS256'
             )
         except Exception as e:
