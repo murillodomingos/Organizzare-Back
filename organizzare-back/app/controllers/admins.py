@@ -71,8 +71,8 @@ def signin_admin():
     if request.method == 'POST':
         data = request.get_json()
 
-        cpf = data['cpf']
-        user_pass = data['user_pass']
+        cpf = data['username']
+        user_pass = data['password']
 
         return admins_service.admin_signin(cpf, user_pass)
     return {

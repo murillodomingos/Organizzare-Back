@@ -89,7 +89,7 @@ class Admins_Service():
             if verify == True:
                 return {
                     'message':'CORRECT PASS',
-                    'jwt': self.get_jwt(admin_id, user_type).decode('ascii')
+                    'token': self.get_jwt(admin_id, user_type).decode('ascii')
                 }
             return {
                 'message':'WRONG PASS'

@@ -11,6 +11,8 @@ class middleware():
 
     def __call__(self, environ, start_response):
         request = Request(environ)
+        if request.method == 'OPTIONS':
+            return self.app(environ, start_response)
         print(request.full_path)
         if request.full_path == '/admins/signin?': 
             return self.app(environ, start_response)
@@ -19,8 +21,9 @@ class middleware():
             return self.app(environ, start_response)
 
         try:
-            if 'jwt' in request.headers:
-                admin_jwt = request.headers['jwt']
+            if 'Authorization' in request.headers:
+                admin_jwt_bearer = request.headers['Authorization']
+                admin_jwt = admin_jwt_bearer[7:]
                 if self.get_user_authentication(admin_jwt) == 'admin':
                     return self.app(environ, start_response)
                 if self.get_user_authentication(admin_jwt) == 'resident' and request.full_path.startswith('/bills') and request.method == 'GET':

@@ -121,7 +121,7 @@ class Admins_DAO:
                 }
                 admin.append(admins)
             return {
-                'admin': admin
+                'all': admin
             }
         except:
             print_exc()
