@@ -2,7 +2,7 @@ version: "3"
 
 services:
   database1:
-    build: ./docker/postgres
+    image: postgres:12
     restart: always
     ports:
       - "5432:5432"
